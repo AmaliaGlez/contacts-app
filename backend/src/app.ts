@@ -1,13 +1,11 @@
 import express from 'express';
 import 'express-async-errors';
-import authRoutes from './users/routes/index.js';
 import contactRoutes from './contacts/routes/index.js';
 import { useServerConfigurations, useServerErrorHandling } from './shared/express.js';
 
 let app = express();
 useServerConfigurations(app);
 
-app.use('/auth', authRoutes);
 app.use('/contacts', contactRoutes);
 
 useServerErrorHandling(app);
