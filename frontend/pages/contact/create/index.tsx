@@ -1,10 +1,7 @@
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { FaRegUser } from 'react-icons/fa';
-import { IoIosArrowRoundBack } from 'react-icons/io';
 import { Form } from '../../../components';
-import { MainLayout } from '../../../layouts/MainLayout';
+import { ContactLayout } from '../../../layouts/ContactLayout';
 import { createContact } from '../../../service';
 
 const Create = () => {
@@ -29,28 +26,9 @@ const Create = () => {
   };
 
   return (
-    <MainLayout headerTitle={'New contact'}>
-      <span>
-        <Link href={'/'}>
-          <IoIosArrowRoundBack fontSize={'2rem'} />
-        </Link>
-      </span>
-      <div>
-        <FaRegUser fontSize={'3rem'} />
-        <Form handleSubmit={handleSubmit} error={error} />
-      </div>
-      <style jsx>{`
-        span {
-          margin-left: 1rem;
-        }
-
-        div {
-          color: #7c7c7c;
-          text-align: center;
-          margin: 0.5rem 1.5rem;
-        }
-      `}</style>
-    </MainLayout>
+    <ContactLayout headerTitle={'New contact'}>
+      <Form handleSubmit={handleSubmit} error={error} />
+    </ContactLayout>
   );
 };
 

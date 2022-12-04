@@ -19,22 +19,22 @@ export const Logs = ({ logs }: any) => {
               <div>
                 {log.firstName ? (
                   <p>
-                    <MdArrowRight /> First Name to: {log.firstName}
+                    <MdArrowRight /> First Name: {log.firstName}
                   </p>
                 ) : null}
                 {log.lastName ? (
                   <p>
-                    <MdArrowRight /> Last Name to: {log.lastName}
+                    <MdArrowRight /> Last Name: {log.lastName}
                   </p>
                 ) : null}
                 {log.email ? (
                   <p>
-                    <MdArrowRight /> Email to: {log.email}
+                    <MdArrowRight /> Email: {log.email}
                   </p>
                 ) : null}
                 {log.phoneNumber ? (
                   <p>
-                    <MdArrowRight /> Mobile to: {log.phoneNumber}
+                    <MdArrowRight /> Mobile: {log.phoneNumber}
                   </p>
                 ) : null}
               </div>

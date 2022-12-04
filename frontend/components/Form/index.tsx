@@ -91,7 +91,7 @@ export const Form = ({ handleSubmit, contact, error }: any) => {
 
         button {
           background: #7c7c7c;
-          color: #000000;
+          color: #ffffff;
           cursor: pointer;
           border-radius: 6px;
           border: 1px solid #7c7c7c;
@@ -99,6 +99,7 @@ export const Form = ({ handleSubmit, contact, error }: any) => {
           margin-right: 1rem;
           width: inherit;
           text-transform: uppercase;
+          font-weight: bold;
         }
 
         .buttons {

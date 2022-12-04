@@ -1,9 +1,6 @@
-import Link from 'next/link';
 import { useState } from 'react';
-import { FaRegUser } from 'react-icons/fa';
-import { IoIosArrowRoundBack } from 'react-icons/io';
 import { Form, Logs } from '../../../components';
-import { MainLayout } from '../../../layouts/MainLayout';
+import { ContactLayout } from '../../../layouts/ContactLayout';
 import { updateContact, getContact, getContactLogs } from '../../../service';
 
 const Contact = ({ contact, logs }: any) => {
@@ -29,29 +26,10 @@ const Contact = ({ contact, logs }: any) => {
   };
 
   return (
-    <MainLayout headerTitle={contact.firstName}>
-      <span>
-        <Link href={'/'}>
-          <IoIosArrowRoundBack fontSize={'2rem'} />
-        </Link>
-      </span>
-      <div>
-        <FaRegUser fontSize={'3rem'} />
-        <Form handleSubmit={handleSubmit} contact={contact} error={error} />
-        <Logs logs={logs} />
-      </div>
-      <style jsx>{`
-        span {
-          margin-left: 1rem;
-        }
-
-        div {
-          color: #7c7c7c;
-          text-align: center;
-          margin: 0.5rem 1.5rem;
-        }
-      `}</style>
-    </MainLayout>
+    <ContactLayout headerTitle={contact.firstName}>
+      <Form handleSubmit={handleSubmit} contact={contact} error={error} />
+      <Logs logs={logs} />
+    </ContactLayout>
   );
 };
 
