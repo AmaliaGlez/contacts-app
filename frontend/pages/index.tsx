@@ -4,15 +4,9 @@ import { ListItem, Search } from '../components';
 import { getContacts } from '../service/index';
 import { useFilterContacts } from '../hooks/useFilterContacts';
 import { MainLayout } from '../layouts/MainLayout';
+import { Contact } from '../types';
 
-interface Contact {
-  firstName: String;
-  lastName: String;
-  email: String;
-  phoneNumber: String;
-}
-
-const Home = ({ contacts }: any) => {
+const Home = ({ contacts }: { contacts: Contact[] }) => {
   const { filterContacts, filteredContacts } = useFilterContacts(contacts);
 
   return (
@@ -25,7 +19,7 @@ const Home = ({ contacts }: any) => {
       </div>
       <div className='list'>
         {filteredContacts?.map((contact: Contact) => {
-          return <ListItem contact={contact} />;
+          return <ListItem contact={contact} key={contact._id} />;
         })}
       </div>
       <style jsx>{`

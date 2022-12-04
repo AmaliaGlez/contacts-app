@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import { FaUser } from 'react-icons/fa';
+import { Contact } from '../../types';
 
-export const ListItem = ({ contact }: any) => {
+export const ListItem = ({ contact }: { contact: Contact }) => {
   return (
     <>
       <div>

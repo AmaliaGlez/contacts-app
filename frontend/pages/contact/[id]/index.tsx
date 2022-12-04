@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { Form, Logs } from '../../../components';
 import { ContactLayout } from '../../../layouts/ContactLayout';
-import { updateContact, getContact, getContactLogs } from '../../../service';
+import { updateContact, getContactWithLogs } from '../../../service/index';
+import { Contact } from '../../../types';
 
-const Contact = ({ contact, logs }: any) => {
-  const [error, setError] = useState<Boolean>(false);
+const Contact = ({ contact }: { contact: Contact }) => {
+  const [error, setError] = useState(false);
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
@@ -21,24 +22,24 @@ const Contact = ({ contact, logs }: any) => {
 
     if (!Object.keys(data).length) return;
 
-    // TODO: handle error
+    // const response = await updateContact(contact._id, data);
+    // if (response.error) setError(true);
     await updateContact(contact._id, data);
   };
 
   return (
     <ContactLayout headerTitle={contact.firstName}>
       <Form handleSubmit={handleSubmit} contact={contact} error={error} />
-      <Logs logs={logs} />
+      <Logs contact={contact} />
     </ContactLayout>
   );
 };
 
-export const getServerSideProps = async (ctx: any) => {
-  const { query } = ctx;
-  const contact = await getContact(query.id);
-  const logs = await getContactLogs(query.id);
+export const getServerSideProps = async ({ query }: any) => {
+  const contact = await getContactWithLogs(query.id);
+
   return {
-    props: { contact, logs },
+    props: { contact },
   };
 };
 

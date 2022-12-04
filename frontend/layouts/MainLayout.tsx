@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 import { Header } from '../components/Header';
 
 interface Props {
-  headerTitle: String;
+  headerTitle: string;
   children: ReactNode;
 }
 

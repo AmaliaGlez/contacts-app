@@ -1,6 +1,7 @@
 import { MdArrowRight } from 'react-icons/md';
+import { Contact } from '../../types';
 
-export const Logs = ({ logs }: any) => {
+export const Logs = ({ contact }: { contact: Contact }) => {
   const formatDate = (date: Date) => {
     return new Date(date).toLocaleString('en-US', {
       dateStyle: 'long',
@@ -8,50 +9,70 @@ export const Logs = ({ logs }: any) => {
     });
   };
 
+  let contactFields = {
+    firstName: contact.firstName,
+    lastName: contact.lastName,
+    email: contact.email,
+    phoneNumber: contact.phoneNumber,
+  };
+
+  const logsDiff =
+    contact.logs?.map((log, idx) => {
+      // Compare with current contact for the first one
+      if (idx === 0) return { after: contact, before: log };
+
+      // Update contactFields with edits
+      contactFields = { ...contactFields, ...contact.logs?.[idx - 1] };
+      return { after: contactFields, before: log };
+    }) || [];
+
   return (
     <>
-      <h2>Edit history</h2>
-      {logs.length ? (
-        logs.map((log: any) => {
-          return (
-            <div className='log' key={log._id}>
-              <p>On {formatDate(log.updatedAt)}:</p>
-              <div>
-                {log.firstName ? (
-                  <p>
-                    <MdArrowRight /> First Name: {log.firstName}
-                  </p>
-                ) : null}
-                {log.lastName ? (
-                  <p>
-                    <MdArrowRight /> Last Name: {log.lastName}
-                  </p>
-                ) : null}
-                {log.email ? (
-                  <p>
-                    <MdArrowRight /> Email: {log.email}
-                  </p>
-                ) : null}
-                {log.phoneNumber ? (
-                  <p>
-                    <MdArrowRight /> Mobile: {log.phoneNumber}
-                  </p>
-                ) : null}
-              </div>
+      <h3>Edit history</h3>
+      {logsDiff.length ? (
+        logsDiff?.map(({ before, after }) => (
+          <div className='log' key={before.updatedAt.toString()}>
+            <p>On {formatDate(before.updatedAt)}:</p>
+            <div>
+              {before.firstName ? (
+                <p>
+                  <MdArrowRight />
+                  {`Updated firstName "${before.firstName}" to "${after.firstName}".`}
+                </p>
+              ) : null}
+              {before.lastName ? (
+                <p>
+                  <MdArrowRight />
+                  {`Updated lastName "${before.lastName}" to "${after.lastName}".`}
+                </p>
+              ) : null}
+              {before.email ? (
+                <p>
+                  <MdArrowRight />
+                  {`Updated email "${before.email}" to "${after.email}".`}
+                </p>
+              ) : null}
+              {before.phoneNumber ? (
+                <p>
+                  <MdArrowRight />
+                  {`Updated phoneNumber "${before.phoneNumber}" to "${after.phoneNumber}".`}
+                </p>
+              ) : null}
             </div>
-          );
-        })
+          </div>
+        ))
       ) : (
         <p>This contact has never been edited.</p>
       )}
       <style jsx>{`
-        h2 {
+        h3 {
           color: #ffffff;
           text-align: start;
         }
 
         p {
           text-align: start;
+          font-size: 0.8rem;
         }
 
         .log {

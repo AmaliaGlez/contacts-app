@@ -11,7 +11,6 @@ export function useServerConfigurations(app: Application) {
   app.use(cors());
   app.use(helmet());
   app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
-  app.use(express.urlencoded({ extended: false }));
 }
 
 export function useServerErrorHandling(app: Application) {

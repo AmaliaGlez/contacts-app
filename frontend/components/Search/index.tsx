@@ -1,4 +1,4 @@
-export const Search = ({ onChange }: any) => {
+export const Search = ({ onChange }: { onChange: (e: any) => void }) => {
   return (
     <>
       <input type='search' placeholder='Search contact' onChange={onChange} />

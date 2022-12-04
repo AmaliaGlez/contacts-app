@@ -1,8 +1,4 @@
-interface Props {
-  title: String;
-}
-
-export const Header = ({ title }: Props) => {
+export const Header = ({ title }: { title: string }) => {
   return (
     <header>
       <h1>{title}</h1>

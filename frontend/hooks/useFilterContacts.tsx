@@ -1,22 +1,18 @@
 import { useState } from 'react';
+import { Contact } from '../types';
 
-interface Contact {
-  firstName: String;
-  lastName: String;
-  email: String;
-  phoneNumber: String;
-}
+export const useFilterContacts = (contacts: Contact[]) => {
+  const [filteredContacts, setFilteredContacts] = useState(contacts);
 
-export const useFilterContacts = (contacts: Array<Contact>) => {
-  const [filteredContacts, setFilteredContacts] = useState<Contact[]>([]);
+  const checkIncludes = (value: string, filter: string) => {
+    return value.toLowerCase().includes(filter.toLowerCase());
+  };
 
   const filterContacts = (e: any) => {
     const value = e.target.value;
     if (!value) return setFilteredContacts(contacts);
     const search = contacts.filter(
-      (contact) =>
-        contact.firstName.toLowerCase().includes(value) ||
-        contact.lastName.toLowerCase().includes(value)
+      (contact) => checkIncludes(contact.firstName, value) || checkIncludes(contact.lastName, value)
     );
     setFilteredContacts(search);
   };

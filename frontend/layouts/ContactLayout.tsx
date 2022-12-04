@@ -5,7 +5,7 @@ import { IoIosArrowRoundBack } from 'react-icons/io';
 import { MainLayout } from './MainLayout';
 
 interface Props {
-  headerTitle: String;
+  headerTitle: string;
   children: ReactNode;
 }
 

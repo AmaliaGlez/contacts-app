@@ -1,6 +1,13 @@
+import { Contact } from '../../types';
 import { DeleteButton } from '../DeleteButton';
 
-export const Form = ({ handleSubmit, contact, error }: any) => {
+interface Props {
+  handleSubmit: (e: any) => void;
+  contact?: Contact;
+  error: boolean;
+}
+
+export const Form = ({ handleSubmit, contact, error }: Props) => {
   const required = contact ? false : true;
   const submitText = contact ? 'Edit' : 'Create';
 
@@ -14,7 +21,7 @@ export const Form = ({ handleSubmit, contact, error }: any) => {
             id='firstName'
             name='firstName'
             required={required}
-            placeholder={contact?.firstName || null}
+            defaultValue={contact?.firstName}
           />
         </div>
         <div>
@@ -24,7 +31,7 @@ export const Form = ({ handleSubmit, contact, error }: any) => {
             id='lastName'
             name='lastName'
             required={required}
-            placeholder={contact?.lastName || null}
+            defaultValue={contact?.lastName}
           />
         </div>
         <div>
@@ -34,7 +41,7 @@ export const Form = ({ handleSubmit, contact, error }: any) => {
             id='email'
             name='email'
             required={required}
-            placeholder={contact?.email || null}
+            defaultValue={contact?.email}
           />
         </div>
         <div>
@@ -44,7 +51,7 @@ export const Form = ({ handleSubmit, contact, error }: any) => {
             id='phoneNumber'
             name='phoneNumber'
             required={required}
-            placeholder={contact?.phoneNumber || null}
+            defaultValue={contact?.phoneNumber}
           />
         </div>
         {error ? <p className='error'>An error ocurred. Please, try again.</p> : null}
@@ -109,7 +116,7 @@ export const Form = ({ handleSubmit, contact, error }: any) => {
         }
 
         p {
-          color: d52b2b;
+          color: #d52b2b;
         }
       `}</style>
     </>

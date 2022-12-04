@@ -1,12 +1,8 @@
 import { useRouter } from 'next/router';
 import { FaUserTimes } from 'react-icons/fa';
-import { deleteContact } from '../../service';
+import { deleteContact } from '../../service/index';
 
-interface Props {
-  contactId: String;
-}
-
-export const DeleteButton = ({ contactId }: Props) => {
+export const DeleteButton = ({ contactId }: { contactId: string }) => {
   const router = useRouter();
 
   const handleDelete = () => {
