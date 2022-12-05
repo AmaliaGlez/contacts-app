@@ -3,7 +3,7 @@ import { Contact } from '../../types';
 
 interface Props {
   keyValue: string;
-  beforeValue: string;
+  beforeValue?: string;
   afterValue: string;
 }
 
@@ -12,7 +12,9 @@ const LogChange = ({ keyValue, beforeValue, afterValue }: Props) => {
     <>
       <p>
         <MdArrowRight />
-        {`Updated ${keyValue} '${beforeValue}' to '${afterValue}'.`}
+        {beforeValue
+          ? `Updated ${keyValue} '${beforeValue}' to '${afterValue}'.`
+          : `Set ${keyValue} to '${afterValue}'.`}
       </p>
       <style jsx>{`
         p {
@@ -35,53 +37,50 @@ export const Logs = ({ contact }: { contact: Contact }) => {
     });
   };
 
-  let contactFields = {
-    firstName: contact.firstName,
-    lastName: contact.lastName,
-    email: contact.email,
-    phoneNumber: contact.phoneNumber,
-  };
+  let contactFields: Contact;
+  const logs = contact.logs;
 
   const logsDiff =
-    contact.logs?.map((log, idx) => {
-      // Compare with current contact for the first one
-      if (idx === 0) return { after: contact, before: log };
-
-      // Update contactFields with edits
-      contactFields = { ...contactFields, ...contact.logs?.[idx - 1] };
-      return { after: contactFields, before: log };
-    }) || [];
+    logs
+      ?.map((log, idx) => {
+        const contact = { ...contactFields };
+        // Update contactFields with log
+        contactFields = { ...contactFields, ...log };
+        if (idx === 0) return { current: null, log };
+        return { current: contact, log };
+      })
+      .reverse() || [];
 
   return (
     <>
       <h3>Edit history</h3>
       {logsDiff.length ? (
-        logsDiff?.map(({ before, after }) => (
-          <div className='log' key={before.updatedAt.toString()}>
-            <p>On {formatDate(before.updatedAt)}:</p>
+        logsDiff?.map(({ current, log }, idx) => (
+          <div className='log' key={idx}>
+            <p>On {formatDate(log.updatedAt)}:</p>
             <div>
-              {before.firstName ? (
+              {log.firstName ? (
                 <LogChange
                   keyValue='first name'
-                  beforeValue={before.firstName}
-                  afterValue={after.firstName}
+                  beforeValue={current?.firstName}
+                  afterValue={log.firstName}
                 />
               ) : null}
-              {before.lastName ? (
+              {log.lastName ? (
                 <LogChange
                   keyValue={'last name'}
-                  beforeValue={before.lastName}
-                  afterValue={after.lastName}
+                  beforeValue={current?.lastName}
+                  afterValue={log.lastName}
                 />
               ) : null}
-              {before.email ? (
-                <LogChange keyValue={'email'} beforeValue={before.email} afterValue={after.email} />
+              {log.email ? (
+                <LogChange keyValue={'email'} beforeValue={current?.email} afterValue={log.email} />
               ) : null}
-              {before.phoneNumber ? (
+              {log.phoneNumber ? (
                 <LogChange
                   keyValue={'phone number'}
-                  beforeValue={before.phoneNumber}
-                  afterValue={after.phoneNumber}
+                  beforeValue={current?.phoneNumber}
+                  afterValue={log.phoneNumber}
                 />
               ) : null}
             </div>

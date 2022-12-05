@@ -22,25 +22,11 @@ export const getContactWithLogs = async (id: string): Promise<Contact> => {
   return { ...contact, logs };
 };
 
-export const createContact = (
-  body: Omit<Contact, '_id' | 'logs'>
-): Promise<Contact | { error: string }> =>
-  api
-    .post('/contacts', { ...body })
-    .then(({ data }) => data)
-    .catch((error) => ({ error: error.message }));
+export const createContact = (body: Omit<Contact, '_id' | 'logs'>): Promise<Contact> =>
+  api.post('/contacts', { ...body }).then(({ data }) => data);
 
-export const updateContact = (
-  id: string,
-  body: Partial<Contact>
-): Promise<Contact | { error: string }> =>
-  api
-    .patch(`/contacts/${id}`, { ...body })
-    .then(({ data }) => data)
-    .catch((error) => ({ error: error.message }));
+export const updateContact = (id: string, body: Partial<Contact>): Promise<Contact> =>
+  api.patch(`/contacts/${id}`, { ...body }).then(({ data }) => data);
 
-export const deleteContact = (id: string): Promise<{ message: string } | { error: string }> =>
-  api
-    .delete(`/contacts/${id}`)
-    .then(({ data }) => data)
-    .catch((error) => ({ error: error.message }));
+export const deleteContact = (id: string): Promise<{ message: string }> =>
+  api.delete(`/contacts/${id}`).then(({ data }) => data);

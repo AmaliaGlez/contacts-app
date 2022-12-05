@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
 import { Contact } from '../../types';
 import { DeleteButton } from '../DeleteButton';
 import { formStyles } from './form.styles';
@@ -7,8 +8,8 @@ import { formStyles } from './form.styles';
 interface Props {
   submitHandler: (e: any) => void;
   contact?: Contact;
-  error: boolean;
-  schema: any;
+  error: any;
+  schema: z.AnyZodObject;
 }
 
 export const Form = ({ submitHandler, contact, error, schema }: Props) => {
@@ -48,7 +49,7 @@ export const Form = ({ submitHandler, contact, error, schema }: Props) => {
           <input {...register('phoneNumber')} />
           <p>{errors?.phoneNumber?.message}</p>
         </div>
-        {error ? <p className='error'>An error ocurred. Please, try again.</p> : null}
+        {error ? <p className='error'>{error}</p> : null}
         <div className='buttons'>
           <button type='submit'>{submitText}</button>
           {contact ? <DeleteButton contactId={contact._id} /> : null}

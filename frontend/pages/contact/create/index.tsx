@@ -1,15 +1,10 @@
-import { useRouter } from 'next/router';
-import { useState } from 'react';
 import { z } from 'zod';
 import { Form } from '../../../components';
+import { useCreateContact } from '../../../hooks/api';
 import { ContactLayout } from '../../../layouts/ContactLayout';
-import { createContact } from '../../../service/index';
+import { Contact } from '../../../types';
 
 const Create = () => {
-  const [error, setError] = useState(false);
-
-  const router = useRouter();
-
   const schema = z.object({
     firstName: z
       .string()
@@ -29,23 +24,19 @@ const Create = () => {
       .regex(/^[0-9]+$/, { message: 'Should be a number' }),
   });
 
-  const handleSubmit = async (data: any) => {
-    setError(false);
+  const mutation = useCreateContact();
 
-    // const response = await createContact(data);
-    // console.log(response);
-    // if (response.error) {
-    //   setError(true);
-    // } else {
-    //   router.push('/');
-    // }
-    await createContact(data);
-    router.push('/');
+  const handleSubmit = async (data: Contact) => {
+    mutation.mutate(data);
   };
 
   return (
     <ContactLayout headerTitle={'New contact'}>
-      <Form submitHandler={handleSubmit} error={error} schema={schema} />
+      <Form
+        submitHandler={handleSubmit}
+        error={mutation?.error?.response?.data.error}
+        schema={schema}
+      />
     </ContactLayout>
   );
 };
