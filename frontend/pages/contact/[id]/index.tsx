@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { z } from 'zod';
 import { Form, Logs } from '../../../components';
 import { ContactLayout } from '../../../layouts/ContactLayout';
 import { updateContact, getContactWithLogs } from '../../../service/index';
@@ -7,19 +8,17 @@ import { Contact } from '../../../types';
 const Contact = ({ contact }: { contact: Contact }) => {
   const [error, setError] = useState(false);
 
-  const handleSubmit = async (event: any) => {
-    event.preventDefault();
+  const schema = z.object({
+    firstName: z.string().trim().optional(),
+    lastName: z.string().trim().optional(),
+    email: z.string().email().optional(),
+    phoneNumber: z.string().trim().optional(),
+  });
+
+  const handleSubmit = async (data: any) => {
     setError(false);
 
-    const data: any = {
-      firstName: event.target.firstName.value,
-      lastName: event.target.lastName.value,
-      email: event.target.email.value,
-      phoneNumber: event.target.phoneNumber.value,
-    };
-
     Object.keys(data).forEach((k) => data[k] === '' && delete data[k]);
-
     if (!Object.keys(data).length) return;
 
     // const response = await updateContact(contact._id, data);
@@ -29,7 +28,7 @@ const Contact = ({ contact }: { contact: Contact }) => {
 
   return (
     <ContactLayout headerTitle={contact.firstName}>
-      <Form handleSubmit={handleSubmit} contact={contact} error={error} />
+      <Form submitHandler={handleSubmit} contact={contact} error={error} schema={schema} />
       <Logs contact={contact} />
     </ContactLayout>
   );
