@@ -2,7 +2,7 @@ import axios from 'axios';
 import { Contact, ContactLog } from '../types';
 
 const api = axios.create({
-  baseURL: 'http://localhost:3001',
+  baseURL: process.env.BASE_URL || 'http://localhost:3001',
   headers: {
     'Content-type': 'application/json',
   },
@@ -30,13 +30,16 @@ export const createContact = (
     .then(({ data }) => data)
     .catch((error) => ({ error: error.message }));
 
-export const updateContact = (id: string, body: Partial<Contact>): Promise<Contact> =>
+export const updateContact = (
+  id: string,
+  body: Partial<Contact>
+): Promise<Contact | { error: string }> =>
   api
     .patch(`/contacts/${id}`, { ...body })
     .then(({ data }) => data)
     .catch((error) => ({ error: error.message }));
 
-export const deleteContact = (id: string): Promise<{ message: string }> =>
+export const deleteContact = (id: string): Promise<{ message: string } | { error: string }> =>
   api
     .delete(`/contacts/${id}`)
     .then(({ data }) => data)

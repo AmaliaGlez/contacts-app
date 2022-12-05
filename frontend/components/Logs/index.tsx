@@ -1,6 +1,32 @@
 import { MdArrowRight } from 'react-icons/md';
 import { Contact } from '../../types';
 
+interface Props {
+  keyValue: string;
+  beforeValue: string;
+  afterValue: string;
+}
+
+const LogChange = ({ keyValue, beforeValue, afterValue }: Props) => {
+  return (
+    <>
+      <p>
+        <MdArrowRight />
+        {`Updated ${keyValue} '${beforeValue}' to '${afterValue}'.`}
+      </p>
+      <style jsx>{`
+        p {
+          display: flex;
+          align-items: center;
+          color: #7c7c7c;
+          margin-top: 0.5rem;
+          font-size: 0.8rem;
+        }
+      `}</style>
+    </>
+  );
+};
+
 export const Logs = ({ contact }: { contact: Contact }) => {
   const formatDate = (date: Date) => {
     return new Date(date).toLocaleString('en-US', {
@@ -35,28 +61,28 @@ export const Logs = ({ contact }: { contact: Contact }) => {
             <p>On {formatDate(before.updatedAt)}:</p>
             <div>
               {before.firstName ? (
-                <p>
-                  <MdArrowRight />
-                  {`Updated firstName "${before.firstName}" to "${after.firstName}".`}
-                </p>
+                <LogChange
+                  keyValue='first name'
+                  beforeValue={before.firstName}
+                  afterValue={after.firstName}
+                />
               ) : null}
               {before.lastName ? (
-                <p>
-                  <MdArrowRight />
-                  {`Updated lastName "${before.lastName}" to "${after.lastName}".`}
-                </p>
+                <LogChange
+                  keyValue={'last name'}
+                  beforeValue={before.lastName}
+                  afterValue={after.lastName}
+                />
               ) : null}
               {before.email ? (
-                <p>
-                  <MdArrowRight />
-                  {`Updated email "${before.email}" to "${after.email}".`}
-                </p>
+                <LogChange keyValue={'email'} beforeValue={before.email} afterValue={after.email} />
               ) : null}
               {before.phoneNumber ? (
-                <p>
-                  <MdArrowRight />
-                  {`Updated phoneNumber "${before.phoneNumber}" to "${after.phoneNumber}".`}
-                </p>
+                <LogChange
+                  keyValue={'phone number'}
+                  beforeValue={before.phoneNumber}
+                  afterValue={after.phoneNumber}
+                />
               ) : null}
             </div>
           </div>
@@ -79,13 +105,6 @@ export const Logs = ({ contact }: { contact: Contact }) => {
           color: #ffffff;
           margin-bottom: 0.5rem;
           text-align: start;
-        }
-
-        .log > div > p {
-          display: flex;
-          align-items: center;
-          color: #7c7c7c;
-          margin-top: 0.5rem;
         }
       `}</style>
     </>

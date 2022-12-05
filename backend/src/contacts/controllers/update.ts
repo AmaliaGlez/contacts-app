@@ -6,7 +6,7 @@ function getOldFieldsToBeUpdated(oldContact, newContact) {
   return Object.keys(newContact).reduce((acc, key) => {
     if (newContact[key] !== oldContact[key] && newContact[key]) {
       acc[key] = oldContact[key];
-    } 
+    }
     return acc;
   }, {});
 }
@@ -19,11 +19,15 @@ async function updateContact(req: Request, res: Response) {
   const { id } = req.params;
   const { firstName, lastName, email, phoneNumber } = req.body;
 
+  const emailExist = await Contact.findOne({ email });
+  if (emailExist && emailExist._id.toString() !== id)
+    return res.status(400).json({ error: 'Email already exists' });
+
   const oldContact = await Contact.findById(id);
   const newContact = { firstName, lastName, email, phoneNumber };
 
   if (!oldContact) {
-    return res.status(404).json({ message: 'Contact not found' });
+    return res.status(404).json({ error: 'Contact not found' });
   }
 
   const oldFieldsToUpdate = getOldFieldsToBeUpdated(oldContact, newContact);

@@ -5,6 +5,7 @@ import getContacts from '../controllers/get.js';
 import getContact from '../controllers/getById.js';
 import getContactLogs from '../controllers/getLogs.js';
 import updateContact from '../controllers/update.js';
+
 const router = express.Router();
 
 router.post('/', createContact);

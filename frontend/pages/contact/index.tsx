@@ -1,8 +1,12 @@
-export const getStaticProps = () => {
+export default function init() {
+  return <div />
+}
+
+export const getServerSideProps = () => {
   return {
     redirect: {
       destination: '/',
-      permanent: true,
+      permanent: false,
     },
   };
 };
