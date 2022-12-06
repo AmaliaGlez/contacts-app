@@ -2,7 +2,7 @@ import axios from 'axios';
 import { Contact, ContactLog } from '../types';
 
 const api = axios.create({
-  baseURL: process.env.BASE_URL || 'http://localhost:3001',
+  baseURL: process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3001',
   headers: {
     'Content-type': 'application/json',
   },
