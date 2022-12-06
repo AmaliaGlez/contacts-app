@@ -53,8 +53,11 @@ export const useUpdateContact = (id?: string) => {
 
 export const useDeleteContact = (id: string) => {
   const queryClient = useQueryClient();
+  const router = useRouter();
   return useMutation({
     mutationFn: () => deleteContact(id),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['contactsList'] }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['contactsList'] }), router.push('/');
+    },
   });
 };
