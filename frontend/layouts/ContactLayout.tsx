@@ -5,13 +5,13 @@ import { IoIosArrowRoundBack } from 'react-icons/io';
 import { MainLayout } from './MainLayout';
 
 interface Props {
-  headerTitle: string;
+  headerTitle?: string;
   children: ReactNode;
 }
 
 export const ContactLayout = ({ headerTitle, children }: Props) => {
   return (
-    <MainLayout headerTitle={headerTitle}>
+    <MainLayout headerTitle={headerTitle || ''}>
       <span>
         <Link href={'/'}>
           <IoIosArrowRoundBack fontSize={'2rem'} />

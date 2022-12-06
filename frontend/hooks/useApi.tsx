@@ -22,7 +22,7 @@ export const useGetContact = (id: string) => {
 export const useGetContactWithLogs = (id: string) => {
   const { data: contact } = useQuery(['contact', id], () => getContact(id));
   const { data: logs } = useQuery(['contactLogs', id], () => getContactLogs(id));
-  return { ...contact, logs };
+  return { contact, logs };
 };
 
 export const useCreateContact = () => {
@@ -38,10 +38,10 @@ export const useCreateContact = () => {
   });
 };
 
-export const useUpdateContact = (id: string) => {
+export const useUpdateContact = (id?: string) => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (body: Partial<Contact>) => updateContact(id, body),
+    mutationFn: (body: Partial<Contact>) => updateContact(id!, body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['contactsList'] });
       queryClient.invalidateQueries({ queryKey: ['contact', id] });

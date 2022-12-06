@@ -1,13 +1,12 @@
 import Link from 'next/link';
 import { FaUserPlus } from 'react-icons/fa';
 import { ListItem, Search } from '../components';
-import { getContacts } from '../service/index';
 import { useFilterContacts } from '../hooks/useFilterContacts';
 import { MainLayout } from '../layouts/MainLayout';
 import { Contact } from '../types';
 
-const Home = ({ contacts }: { contacts: Contact[] }) => {
-  const { filterContacts, filteredContacts } = useFilterContacts(contacts);
+const Home = () => {
+  const { filterContacts, filteredContacts } = useFilterContacts();
 
   return (
     <MainLayout headerTitle={'Contacts'}>
@@ -37,13 +36,6 @@ const Home = ({ contacts }: { contacts: Contact[] }) => {
       `}</style>
     </MainLayout>
   );
-};
-
-export const getServerSideProps = async () => {
-  const contacts = await getContacts();
-  return {
-    props: { contacts },
-  };
 };
 
 export default Home;

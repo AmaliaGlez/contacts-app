@@ -1,5 +1,5 @@
 import { MdArrowRight } from 'react-icons/md';
-import { Contact } from '../../types';
+import { Contact, ContactLog } from '../../types';
 
 interface Props {
   keyValue: string;
@@ -29,7 +29,7 @@ const LogChange = ({ keyValue, beforeValue, afterValue }: Props) => {
   );
 };
 
-export const Logs = ({ contact }: { contact: Contact }) => {
+export const Logs = ({ logs }: { logs?: ContactLog[] }) => {
   const formatDate = (date: Date) => {
     return new Date(date).toLocaleString('en-US', {
       dateStyle: 'long',
@@ -38,7 +38,6 @@ export const Logs = ({ contact }: { contact: Contact }) => {
   };
 
   let contactFields: Contact;
-  const logs = contact.logs;
 
   const logsDiff =
     logs

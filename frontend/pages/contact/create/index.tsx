@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { Form } from '../../../components';
-import { useCreateContact } from '../../../hooks/api';
+import { useCreateContact } from '../../../hooks/useApi';
 import { ContactLayout } from '../../../layouts/ContactLayout';
 import { Contact } from '../../../types';
 

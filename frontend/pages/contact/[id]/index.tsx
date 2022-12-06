@@ -1,11 +1,13 @@
+import { useRouter } from 'next/router';
 import { z } from 'zod';
 import { Form, Logs } from '../../../components';
-import { useUpdateContact } from '../../../hooks/api';
+import { useGetContactWithLogs, useUpdateContact } from '../../../hooks/useApi';
 import { ContactLayout } from '../../../layouts/ContactLayout';
-import { getContactWithLogs } from '../../../service/index';
-import { Contact } from '../../../types';
 
-const Contact = ({ contact }: { contact: Contact }) => {
+const Contact = () => {
+  const { query } = useRouter();
+  const { contact, logs } = useGetContactWithLogs(query.id as string);
+
   const schema = z.object({
     firstName: z.string().trim().optional(),
     lastName: z.string().trim().optional(),
@@ -13,7 +15,7 @@ const Contact = ({ contact }: { contact: Contact }) => {
     phoneNumber: z.string().trim().optional(),
   });
 
-  const mutation = useUpdateContact(contact._id);
+  const mutation = useUpdateContact(contact?._id);
 
   const handleSubmit = async (data: any) => {
     Object.keys(data).forEach((k) => data[k] === '' && delete data[k]);
@@ -21,25 +23,19 @@ const Contact = ({ contact }: { contact: Contact }) => {
     mutation.mutate(data);
   };
 
+  if (!contact) return null;
+
   return (
-    <ContactLayout headerTitle={contact.firstName}>
+    <ContactLayout headerTitle={contact?.firstName}>
       <Form
         submitHandler={handleSubmit}
         contact={contact}
         error={mutation?.error?.response?.data.error}
         schema={schema}
       />
-      <Logs contact={contact} />
+      <Logs logs={logs} />
     </ContactLayout>
   );
-};
-
-export const getServerSideProps = async ({ query }: any) => {
-  const contact = await getContactWithLogs(query.id);
-
-  return {
-    props: { contact },
-  };
 };
 
 export default Contact;
