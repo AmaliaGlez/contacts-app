@@ -1,9 +1,32 @@
+:root {
+  --primary-color: #2464a3;
+  --primary-color-light: #4278aa;
+  --primary-color-dark: #233c55;
+  --secondary-color: #e4e0e0;
+  --secondary-color-light: #888888;
+  --secondary-color-dark: #565a69;
+  --tertiary-color: #a93a3a;
+  --tertiary-color-light: #b45555;
+  --primary-background-color: #12131d;
+  --secondary-background-color: #1b1b1d;
+  --tertiary-background-color: #4d4f63;
+  --transparent-background-color: #3c3c3c8e;
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
+    Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  display: flex;
+  justify-content: center;
+  height: 80vh;
+  background: var(--tertiary-background-color);
+}
+
+* {
+  box-sizing: border-box;
 }
 
 a {
@@ -11,16 +34,47 @@ a {
   text-decoration: none;
 }
 
-* {
-  box-sizing: border-box;
+h1,
+p {
+  margin: 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+button {
+  cursor: pointer;
+  border-radius: 15px;
+  border: none;
+  padding: 0.75rem;
+  width: inherit;
+  text-transform: uppercase;
+}
+
+.primary-button {
+  background: var(--primary-color);
+  color: var(--secondary-color);
+}
+
+.delete-button {
+  background: var(--tertiary-color);
+  color: var(--secondary-color);
+}
+
+.primary-button:hover {
+  background: var(--primary-color-light);
+}
+
+.delete-button:hover {
+  background: var(--tertiary-color-light);
+}
+
+h1 {
+  color: var(--secondary-color);
+  font-weight: normal;
+  padding: 1.2rem 0;
+  letter-spacing: 0.05rem;
+}
+
+@media (min-width: 480px) {
   body {
-    color: white;
-    background: black;
+    align-items: center;
   }
 }

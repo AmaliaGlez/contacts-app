@@ -1,4 +1,3 @@
-import createError from 'http-errors';
 import express, { Application } from 'express';
 import 'express-async-errors';
 import logger from 'morgan';
@@ -11,22 +10,21 @@ export function useServerConfigurations(app: Application) {
   app.use(cors());
   app.use(helmet());
   app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
-  app.use(express.urlencoded({ extended: false }));
 }
 
 export function useServerErrorHandling(app: Application) {
-  // catch 404 and forward to error handler
+  // Catch 404 and forward to error handler
   app.use(function (req, res, next) {
-    next(createError(404, 'Not Found'));
+    res.status(404).json({ error: 'Not Found' });
   });
 
-  // error handler
+  // Error handler
   app.use(function (err, req, res, next) {
-    // set locals, only providing error in development
+    // Set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-    // render the error page
+    // Render the error page
     res.status(err.statusCode || 500);
     res.json({ error: err.message });
   });

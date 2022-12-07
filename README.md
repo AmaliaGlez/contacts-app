@@ -1,13 +1,24 @@
 # Contacts app
 
-Contacts app playground using [Next.js](https://nextjs.org/).
+Contacts app playground.
+
+Frontend:
+
+- [Next.js](https://nextjs.org/)
+- [React Query](https://tanstack.com/query/v4)
+
+Backend:
+
+- [Node.js](https://nodejs.org/)
+- [MongoDB and Mongoose](https://www.mongodb.com/developer/languages/javascript/getting-started-with-mongodb-and-mongoose/)
 
 ## Getting started
 
-Install and run the project:
+Run the project:
 
-### Code format check
+```sh
+cd docker
+docker-compose up
+```
 
-### Run the app in development mode
-
-### Build the app for production
+Then, open [http://localhost:3000](http://localhost:3000)
