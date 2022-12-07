@@ -14,10 +14,20 @@ Backend:
 
 ## Getting started
 
-Run the project:
+### Run the project:
 
 ```sh
 cd docker
+docker-compose up
+```
+
+Then, open [http://localhost:3000](http://localhost:3000)
+
+### If you need to rebuild the image:
+
+```sh
+docker-compose down
+docker-compose build
 docker-compose up
 ```
 

@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Contact } from '../../types';
-import { DeleteButton } from '../DeleteButton';
+import { Delete } from '../Delete';
 import { formStyles } from './form.styles';
 
 interface Props {
@@ -70,7 +70,7 @@ export const Form = ({ submitHandler, contact, error }: Props) => {
           <button className='primary-button' type='submit'>
             {submitText}
           </button>
-          {contact ? <DeleteButton contactId={contact._id} /> : null}
+          {contact ? <Delete contactId={contact._id} /> : null}
         </div>
       </form>
       <style jsx>{formStyles}</style>
