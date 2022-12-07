@@ -19,11 +19,26 @@ export const MainLayout = ({ children }: { children: ReactNode }) => {
           width: min(100vw, 500px);
           box-shadow: rgb(0 0 0 / 20%) -4px 5px 15px 0px, rgb(0 0 0 / 15%) 0px 4px 6px -2px;
           overflow: auto;
-          height: 55vh;
         }
 
         ::-webkit-scrollbar {
-          display: none;
+          width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+          background: transparent;
+          border-radius: 30px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+          background: var(--secondary-color-light);
+          border-radius: 30px;
+        }
+
+        @media (min-width: 480px) {
+          main {
+            height: 760px;
+          }
         }
       `}</style>
     </>

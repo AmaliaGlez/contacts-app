@@ -1,4 +1,4 @@
-export * from './DeleteButton';
+export * from './Delete';
 export * from './Form';
 export * from './ListItem';
 export * from './Logs';
