@@ -1,35 +1,36 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { ReactNode } from 'react';
-import { FaRegUser } from 'react-icons/fa';
 import { IoIosArrowRoundBack } from 'react-icons/io';
 import { MainLayout } from './MainLayout';
 
-interface Props {
-  headerTitle?: string;
-  children: ReactNode;
-}
-
-export const ContactLayout = ({ headerTitle, children }: Props) => {
+export const ContactLayout = ({ children }: { children: ReactNode }) => {
   return (
-    <MainLayout headerTitle={headerTitle || ''}>
-      <span>
-        <Link href={'/'}>
-          <IoIosArrowRoundBack fontSize={'2rem'} />
-        </Link>
-      </span>
+    <MainLayout>
+      <Link href={'/'}>
+        <IoIosArrowRoundBack fontSize={'2rem'} />
+      </Link>
       <div>
-        <FaRegUser fontSize={'3rem'} />
+        <span>
+          <Image src='/mindful.svg' alt='mindful' width='120' height='120' />
+        </span>
         {children}
       </div>
       <style jsx>{`
-        span {
-          margin-left: 1rem;
-        }
-
         div {
           color: #7c7c7c;
           text-align: center;
-          margin: 0.5rem 1.5rem;
+          display: flex;
+          flex-direction: column;
+        }
+
+        span {
+          align-self: center;
+          color: #7c7c7c;
+          border-radius: 50%;
+          background: var(--secondary-background-color);
+          width: 120px;
+          height: 120px;
         }
       `}</style>
     </MainLayout>

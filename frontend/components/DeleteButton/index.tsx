@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { FaUserTimes } from 'react-icons/fa';
 import { Modal } from '../Modal';
 import { useDeleteContact } from '../../hooks/useApi';
 
@@ -14,14 +13,15 @@ export const DeleteButton = ({ contactId }: { contactId: string }) => {
 
   return (
     <>
-      <button onClick={handleOpen}>
-        <FaUserTimes fontSize={'2rem'} />
+      <button className='delete-button' onClick={handleOpen}>
+        Delete
       </button>
       {isModalOpen && (
-        <Modal title='Delete' handleClose={handleClose}>
+        <Modal title='Delete contact' handleClose={handleClose}>
           <p>Are you sure you want to delete this contact?</p>
+          {mutation.error ? <p className='error'>An error occurred</p> : null}
           <div className='buttons'>
-            <button className='cancel-button' onClick={handleClose}>
+            <button className='primary-button' onClick={handleClose}>
               Cancel
             </button>
             <button className='delete-button' onClick={handleDelete}>
@@ -31,21 +31,15 @@ export const DeleteButton = ({ contactId }: { contactId: string }) => {
         </Modal>
       )}
       <style jsx>{`
-        button {
-          background: transparent;
-          color: #d52b2b;
-          cursor: pointer;
-          border: none;
-        }
-
         .buttons {
           display: flex;
-          justify-content: end;
+          justify-content: space-evenly;
           margin-top: 2rem;
         }
 
-        .cancel-button {
-          color: #7c7c7c;
+        .error {
+          color: var(--tertiary-color-light);
+          margin-top: 0.5rem;
         }
       `}</style>
     </>

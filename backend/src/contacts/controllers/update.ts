@@ -24,9 +24,9 @@ async function updateContact(req: Request, res: Response) {
   const newContact = { firstName, lastName, email, phoneNumber };
 
   if (!oldContact) {
-    return res.status(404).json({ message: 'Contact not found' });
+    return res.status(404).json({ error: 'Contact not found' });
   }
-  // Filter newContact with null values
+
   const fieldsToUpdate = getFieldsToBeUpdated(oldContact, newContact);
 
   if (fieldsToUpdate.email) {

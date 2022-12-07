@@ -1,26 +1,35 @@
+import Image from 'next/image';
 import Link from 'next/link';
-import { FaUser } from 'react-icons/fa';
 import { Contact } from '../../types';
 
 export const ListItem = ({ contact }: { contact: Contact }) => {
   return (
     <>
-      <div>
-        <Link href={`/contact/${contact._id}`}>
+      <Link href={`/contact/${contact._id}`}>
+        <div>
           <span>
-            <FaUser fontSize={'1.5rem'} />
+            <Image src='/mindful.svg' alt='mindful' width='50' height='50' />
           </span>
           {contact.firstName} {contact.lastName}
-        </Link>
-      </div>
+        </div>
+      </Link>
       <style jsx>{`
         div {
-          margin: 0.5rem 0;
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          transition: background 0.2s ease-in-out;
+          border-radius: 1rem;
+        }
+
+        div:hover {
+          background: var(--secondary-background-color);
         }
 
         span {
-          color: #7c7c7c;
-          margin: 1rem;
+          border-radius: 50%;
+          background: var(--secondary-background-color);
+          transition: transform 0.2s ease-in-out;
         }
       `}</style>
     </>

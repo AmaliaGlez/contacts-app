@@ -35,7 +35,7 @@ export const Modal = ({ children, title, handleClose }: ModalProps) => {
         <div ref={ref} className='backdrop'>
           <div className='modal' onClick={handleHeaderClick}>
             <div>
-              <p>{title}</p>
+              <h3>{title}</h3>
               <button onClick={handleClose}>
                 <MdClose fontSize={'1.2rem'} />
               </button>

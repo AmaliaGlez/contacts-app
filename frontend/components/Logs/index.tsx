@@ -1,5 +1,6 @@
 import { MdArrowRight } from 'react-icons/md';
 import { Contact, ContactLog } from '../../types';
+import { logsStyles } from './logs.styles';
 
 interface Props {
   keyValue: string;
@@ -20,7 +21,7 @@ const LogChange = ({ keyValue, beforeValue, afterValue }: Props) => {
         p {
           display: flex;
           align-items: center;
-          color: #7c7c7c;
+          color: var(--secondary-color-light);
           margin-top: 0.5rem;
           font-size: 0.8rem;
         }
@@ -88,23 +89,7 @@ export const Logs = ({ logs }: { logs?: ContactLog[] }) => {
       ) : (
         <p>This contact has never been edited.</p>
       )}
-      <style jsx>{`
-        h3 {
-          color: #ffffff;
-          text-align: start;
-        }
-
-        p {
-          text-align: start;
-          font-size: 0.8rem;
-        }
-
-        .log {
-          color: #ffffff;
-          margin-bottom: 0.5rem;
-          text-align: start;
-        }
-      `}</style>
+      <style jsx>{logsStyles}</style>
     </>
   );
 };

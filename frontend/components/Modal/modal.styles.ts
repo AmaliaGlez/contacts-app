@@ -7,7 +7,7 @@ export const modalStyles = css`
 
   .backdrop {
     position: fixed;
-    background: #4d4d4dcc;
+    background: var(--transparent-background-color);
     top: 0;
     right: 0;
     bottom: 0;
@@ -18,31 +18,28 @@ export const modalStyles = css`
   }
 
   .modal {
-    background: #ffffff;
-    border-radius: 4px;
+    background: var(--secondary-color);
+    border-radius: 15px;
     position: relative;
     padding: 1.5rem;
     overflow: auto;
     width: 300px;
-    margin: 5vh auto;
+    margin: 20% auto;
   }
 
   .modal div:first-child {
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
 
   .modal-content {
-    padding-top: 2rem;
+    padding-top: 1.5rem;
   }
 
   button {
     cursor: pointer;
     background: transparent;
     border: none;
-  }
-
-  button > svg {
-    height: 100%;
   }
 `;

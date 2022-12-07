@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { FaUserPlus } from 'react-icons/fa';
+import { AiOutlineUserAdd } from 'react-icons/ai';
 import { ListItem, Search } from '../components';
 import { useFilterContacts } from '../hooks/useFilterContacts';
 import { MainLayout } from '../layouts/MainLayout';
@@ -9,11 +9,12 @@ const Home = () => {
   const { filterContacts, filteredContacts } = useFilterContacts();
 
   return (
-    <MainLayout headerTitle={'Contacts'}>
+    <MainLayout>
+      <h1>Contacts</h1>
       <div className='actions'>
         <Search onChange={filterContacts} />
         <Link href={'/contact/create'}>
-          <FaUserPlus fontSize={'2rem'} />
+          <AiOutlineUserAdd size={'2rem'} color={'var(--primary-color)'} />
         </Link>
       </div>
       <div className='list'>
@@ -24,14 +25,17 @@ const Home = () => {
       <style jsx>{`
         .actions {
           display: flex;
-          justify-content: end;
+          justify-content: center;
           align-items: center;
-          margin: 1rem;
+          margin: 1rem 0;
+          gap: 1rem;
         }
 
         .list {
+          margin: 1.5rem 0;
           display: flex;
           flex-direction: column;
+          gap: 1rem;
         }
       `}</style>
     </MainLayout>

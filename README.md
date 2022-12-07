@@ -1,6 +1,6 @@
 # Contacts app
 
-Contacts app playground using [Next.js](https://nextjs.org/).
+Contacts app playground using [Next.js](https://nextjs.org/) and [React Query](https://tanstack.com/query/v4).
 
 ## Getting started
 

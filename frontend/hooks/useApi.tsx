@@ -31,19 +31,19 @@ export const useCreateContact = () => {
   return useMutation({
     mutationFn: (body: Omit<Contact, '_id' | 'logs'>) => createContact(body),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['contactsList'] });
+      queryClient.resetQueries({ queryKey: ['contactsList'] });
       router.push('/');
     },
     onError: (error: AxiosError<{ error: string }>) => {},
   });
 };
 
-export const useUpdateContact = (id?: string) => {
+export const useUpdateContact = (id: string) => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (body: Partial<Contact>) => updateContact(id!, body),
+    mutationFn: (body: Partial<Contact>) => updateContact(id, body),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['contactsList'] });
+      queryClient.resetQueries({ queryKey: ['contactsList'] });
       queryClient.invalidateQueries({ queryKey: ['contact', id] });
       queryClient.invalidateQueries({ queryKey: ['contactLogs', id] });
     },
@@ -57,7 +57,8 @@ export const useDeleteContact = (id: string) => {
   return useMutation({
     mutationFn: () => deleteContact(id),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['contactsList'] }), router.push('/');
+      queryClient.resetQueries({ queryKey: ['contactsList'] });
+      router.push('/');
     },
   });
 };
