@@ -36,14 +36,6 @@ async function updateContact(req: Request, res: Response) {
 
   let contact = oldContact;
   if (!areFieldsToUpdateEmpty(fieldsToUpdate)) {
-    // Wrap in transaction if mongo is a replica set
-    // await transact(async (session: ClientSession) => {
-    //   contact = await Contact.findByIdAndUpdate(id, newContact, { session });
-    //   await ContactLog.create(
-    //     { ...oldFieldsToUpdate, contactId: id },
-    //     { session }
-    //   );
-    // });
     contact = await Contact.findByIdAndUpdate(id, newContact, { new: true });
     await ContactLog.create({ ...fieldsToUpdate, contactId: id });
   }
