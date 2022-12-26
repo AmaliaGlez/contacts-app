@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
-import { Form, Logs } from '../../../components';
+import { useState } from 'react';
+import { Delete, Form, Logs } from '../../../components';
 import { useGetContactWithLogs, useUpdateContact } from '../../../hooks/useApi';
 import { ContactLayout } from '../../../layouts/ContactLayout';
 import { Contact } from '../../../types';
@@ -7,10 +8,14 @@ import { Contact } from '../../../types';
 const areArraysEqual = (a: [], b: []) => a.every((value: string, index) => value === b[index]);
 
 const Contact = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { query } = useRouter();
   const { contact, logs } = useGetContactWithLogs(query.id as string);
 
   const mutation = useUpdateContact(contact?._id as string);
+
+  const handleOpen = () => setIsModalOpen(true);
+  const handleClose = () => setIsModalOpen(false);
 
   const handleSubmit = async (data: Partial<Contact>) => {
     const dataToArr = Object.values(data);
@@ -34,6 +39,10 @@ const Contact = () => {
         contact={contact}
         error={mutation?.error?.response?.data.error}
       />
+      <button className='delete-button' onClick={handleOpen}>
+        Delete
+      </button>
+      {isModalOpen ? <Delete contactId={contact._id} handleClose={handleClose} /> : null}
       <Logs logs={logs} />
     </ContactLayout>
   );

@@ -10,26 +10,26 @@ services:
     volumes:
       - mongodb_data_container:/data/db
 
-  front:
-    build:
-      context: ../frontend
-    ports:
-      - 3000:3000
-    environment:
-      - NEXT_PUBLIC_BASE_URL=http://back:3000
-    depends_on:
-      - mongodb
+  # front:
+  #   build:
+  #     context: ../frontend
+  #   ports:
+  #     - 3000:3000
+  #   environment:
+  #     - NEXT_PUBLIC_BASE_URL=http://back:3000
+  #   depends_on:
+  #     - mongodb
 
-  back:
-    build:
-      context: ../backend
-    ports:
-      - 3001:3000
-    environment:
-      - MONGO_URL=mongodb://root:rootpassword@mongodb:27017/?authMechanism=DEFAULT
-      - PORT=3000
-    depends_on:
-      - mongodb
+  # back:
+  #   build:
+  #     context: ../backend
+  #   ports:
+  #     - 3001:3000
+  #   environment:
+  #     - MONGO_URL=mongodb://root:rootpassword@mongodb:27017/?authMechanism=DEFAULT
+  #     - PORT=3000
+  #   depends_on:
+  #     - mongodb
 
 volumes:
   mongodb_data_container:

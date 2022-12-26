@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useRef } from 'react';
+import { ReactNode, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { MdClose } from 'react-icons/md';
 import { useClickOutside } from '../../hooks/useClickOutside';
@@ -16,13 +16,15 @@ interface ModalProps {
 }
 
 const ClientOnlyPortal = ({ children, selector }: PortalProps) => {
-  const ref = useRef<Element | undefined>();
+  const [mounted, setMounted] = useState(false);
+  const ref = useRef<Element | null>(null);
 
   useEffect(() => {
-    ref.current = document.querySelector(selector)!;
+    ref.current = document.querySelector(selector);
+    setMounted(true);
   }, [selector]);
 
-  return ref.current ? createPortal(children, ref.current) : null;
+  return mounted && ref.current ? createPortal(children, ref.current) : null;
 };
 
 export const Modal = ({ children, title, handleClose }: ModalProps) => {
