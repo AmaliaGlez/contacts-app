@@ -3,6 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Contact } from '../../types';
 import { formStyles } from './form.styles';
+import { Delete } from '../Delete';
 
 interface Props {
   submitHandler: (e: any) => void;
@@ -68,6 +69,7 @@ export const Form = ({ submitHandler, contact, error }: Props) => {
         <button className='primary-button' type='submit'>
           {submitText}
         </button>
+        {contact ? <Delete contactId={contact._id} /> : null}
       </form>
       <style jsx>{formStyles}</style>
     </>
