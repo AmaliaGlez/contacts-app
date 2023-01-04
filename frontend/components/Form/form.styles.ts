@@ -45,14 +45,6 @@ export const formStyles = css`
     outline: none;
   }
 
-  .buttons {
-    display: flex;
-    flex-direction: row;
-    gap: 1rem;
-    margin-top: 1rem;
-    width: 100%;
-  }
-
   p {
     color: var(--tertiary-color-light);;
     font-size: 0.9rem;

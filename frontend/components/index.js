@@ -1,4 +1,4 @@
-export * from './Delete';
+export * from './DeleteModal';
 export * from './Form';
 export * from './ListItem';
 export * from './Logs';
