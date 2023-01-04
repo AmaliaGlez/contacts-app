@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { Delete, Form, Logs } from '../../../components';
+import { DeleteModal, Form, Logs } from '../../../components';
 import { useGetContactWithLogs, useUpdateContact } from '../../../hooks/useApi';
 import { ContactLayout } from '../../../layouts/ContactLayout';
 import { Contact } from '../../../types';
@@ -34,7 +34,7 @@ const Contact = () => {
         contact={contact}
         error={mutation?.error?.response?.data.error}
       />
-      {/* <Delete contactId={contact._id} /> */}
+      <DeleteModal contactId={contact._id} />
       <Logs logs={logs} />
     </ContactLayout>
   );

@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { useDeleteContact } from '../../hooks/useApi';
 import { Modal } from '../Modal';
 
-export const Delete = ({ contactId }: { contactId: string }) => {
+export const DeleteModal = ({ contactId }: { contactId: string }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const mutation = useDeleteContact(contactId);
-  const handleDelete = () => mutation.mutate();
 
+  const handleDelete = () => mutation.mutate();
   const handleOpen = () => setIsModalOpen(true);
   const handleClose = () => setIsModalOpen(false);
 
